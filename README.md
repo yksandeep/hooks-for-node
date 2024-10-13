@@ -16,7 +16,7 @@ For the Love of Sarcasm: You can now tell your friends you’re using hooks in N
     ```
  - Install Dependencies:
 
-    No dependencies required! Just pure, unadulterated JavaScript. Just like your last relationship.
+    No dependencies required! Just pure JavaScript..
  - Use It:
 
     Simply import the hooks and start writing your code like you're building a React app. Because who needs a front-end anyway?
