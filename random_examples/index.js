@@ -1,4 +1,4 @@
-const { useState, useEffect } = require('./hooks');
+const { useState, useEffect } = require('../hooks');
 
 // Create a counter state with an initial value of 0
 const [count, setCount] = useState(0);
@@ -42,7 +42,7 @@ useEffect(() => {
 setTimeout(() => setCount(count.value + 1), 1000);
 setTimeout(() => setCount(count.value - 1), 2000);
 setTimeout(() => setCount(count.value + 2), 3000);
-setTimeout(() => setCount(count.value - 2), 4000);
+setTimeout(() => setCount(count.value - 3), 4000);
 
 // Log the final state values after 5 seconds
 setTimeout(() => {

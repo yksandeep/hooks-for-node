@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Worker with Custom Hooks</title>
+    <script src="../hooks.js" defer></script>
+    <script>
+        let worker;
+
+        window.onload = () => {
+            worker = new Worker('sw.js');
+
+            worker.onmessage = (event) => {
+                const { type, value } = event.data;
+                if (type === 'counter') {
+                    document.getElementById('counter').innerText = value;
+                }
+            };
+
+            document.getElementById('incrementButton').onclick = () => {
+                worker.postMessage({ action: 'increment' });
+            };
+        };
+    </script>
+</head>
+<body>
+    <h1>Web Worker Counter</h1>
+    <p>Counter: <span id="counter">0</span></p>
+    <button id="incrementButton">Increment Counter</button>
+</body>
+</html>
