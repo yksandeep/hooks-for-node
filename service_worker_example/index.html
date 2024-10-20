@@ -54,13 +54,14 @@
         const [taskQueue,setTaskQueue] = useState([])
         const [taskStatus,setTaskStatus] = useState({})
 
-
-        useEffect(()=>{
+        useMicroEffect(()=>{
             renderTaskQueue(taskQueue.value)
         },[taskQueue])
-        useEffect(()=>{
+        
+        useMicroEffect(()=>{
             renderTaskStatus(taskStatus.value); // Update the UI for the task status
         },[taskStatus])
+
 
         worker.onmessage = (event) => {
             const { type, value } = event.data;

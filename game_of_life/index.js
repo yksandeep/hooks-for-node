@@ -94,8 +94,10 @@ const startGame = () => {
         }, 150);
       });
     } else {
-      clearInterval(intervalId.value);
-      setIntervalId(null)
+      setIntervalId(prev=>{
+        clearInterval(prev);
+        return null
+      })
     }
   }, [isRunning]);
 

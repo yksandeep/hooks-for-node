@@ -6,13 +6,11 @@ const [isProcessing, setIsProcessing] = useState(false); // Is the queue being p
 
 // Effect to handle task queue updates
 useEffect(() => {
-    console.log("Worker: Task queue updated:", taskQueue.value);
     postMessage({ type: 'taskQueue', value: taskQueue.value });
 }, [taskQueue]);
 
 // Effect to handle task status updates
 useEffect(() => {
-    console.log("Worker: Task status updated:", taskStatus.value);
     postMessage({ type: 'taskStatus', value: taskStatus.value });
 }, [taskStatus]);
 
@@ -49,7 +47,6 @@ const executeTask = (task) => {
     const processingTime = Math.floor(Math.random() * 2000) + 1000; // Simulated processing time between 1-3 seconds
     return new Promise((resolve) => {
         setTimeout(() => {
-            console.log(`Task ${task.id} (${task.type}) completed in ${processingTime} ms.`);
             resolve();
         }, processingTime);
     });
@@ -62,6 +59,5 @@ self.onmessage = (event) => {
     if (action === 'addTask') {
         const newTask = { id: Date.now(), ...task }; // Assign unique ID to each task
         setTaskQueue(prev => [...prev, newTask]); // Add task to queue
-        updateTaskStatus(newTask.id, 'pending'); // Set initial status to pending
     }
 };

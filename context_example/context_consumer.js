@@ -1,19 +1,25 @@
-const {useState,useEffect, useContext } = require('../hooks');
+const {useState,useEffect, useContext, useMicroEffect } = require('../hooks');
 const {SomeContext} = require('./context');
 
 const [updateNum,setUpdateNum] = useState(false)
+const {setNum} = useContext(SomeContext)
 
-const {num,setNum} = useContext(SomeContext)
+
 
 useEffect(()=>{
     if(updateNum.value){
-        console.log("running useEffect")
-        setNum(prev=>prev+1)
+        setNum(prev=>{
+            console.log(prev === 1?"running useEffect":"running again")
+            return prev+1
+        })
     }
 },[updateNum])
 
 
+
 const someFunction = ()=>{
+const {num,setNum} = useContext(SomeContext)
+
     console.log("initalized currentNum with value",num.value)
     const [currentNum,setCurrentNum] = useState(num.value)
     

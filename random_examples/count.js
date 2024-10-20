@@ -40,9 +40,9 @@ useEffect(() => {
 
 // Simulate some state updates
 setTimeout(() => setCount(count.value + 1), 1000);
-setTimeout(() => setCount(count.value - 1), 2000);
-setTimeout(() => setCount(count.value + 2), 3000);
-setTimeout(() => setCount(count.value - 3), 4000);
+setTimeout(() => setCount(count.value - 2), 2000);
+setTimeout(() => setCount(count.value + 3), 3000);
+setTimeout(() => setCount(count.value - 4), 4000);
 
 // Log the final state values after 5 seconds
 setTimeout(() => {
