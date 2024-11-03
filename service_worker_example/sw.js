@@ -3,6 +3,10 @@ importScripts('../hooks.js');
 const [taskQueue, setTaskQueue] = useState([]);
 const [taskStatus, setTaskStatus] = useState({}); // Track status of tasks
 const [isProcessing, setIsProcessing] = useState(false); // Is the queue being processed?
+const [networkStatus,setNetworkStatus] = useState(navigator.onLine);
+const [appPermissions, setAppPermissions] = useState({
+    notifications:false
+});
 
 // Effect to handle task queue updates
 useEffect(() => {
@@ -33,7 +37,7 @@ const processNextTask = async () => {
     await executeTask(task); // Execute the task
     updateTaskStatus(task.id, 'completed'); // Update status to completed
     setTaskQueue(prev => prev.slice(1)); // Remove completed task from queue
-
+    postMessage({ type: 'taskCompleted', value: {taskId:task.id,status:"completed" }});
     // Process the next task after the current one is done
     processNextTask();
 };
@@ -60,4 +64,25 @@ self.onmessage = (event) => {
         const newTask = { id: Date.now(), ...task }; // Assign unique ID to each task
         setTaskQueue(prev => [...prev, newTask]); // Add task to queue
     }
+
+    if(action === "setPermission"){
+        if(task.type === "notifiction"){
+            setAppPermissions(prev => {
+                const newState = {...prev}
+                newState.notifications = task.value;
+                return newState
+            });
+        }
+    }
 };
+
+self.addEventListener("offline", (event) => {
+    postMessage({ type: 'network_status', value:{online:false} });
+});
+
+// addEventListener version
+self.addEventListener("online", (event) => {
+    postMessage({ type: 'network_status', value:{online:true} });
+});
+
+

@@ -16,19 +16,21 @@ const writeToFile = (message) => {
 };
 
 const [state, setState] = useState(0);
+
 useMacroEffect(() => {
   console.log(state.value, "Macro");
 }, [state]);
 
 useEffect(() => {
-  if (state.value === 0) return;
   const returnd = writeToFile(`Effect: State is now ${state.value}`);
   console.log(`Effect: Completed writing for state ${returnd}`);
 }, [state]);
 
 useMicroEffect(() => {
   for (let i = 0; i < 5; i++) {
-    setState(i);
+    // setTimeout(() => {
+      setState(i);
+    // },1000*i)
   }
 }, []);
 

@@ -1,4 +1,0 @@
-Effect: State is now 1
-Effect: State is now 2
-Effect: State is now 3
-Effect: State is now 4
